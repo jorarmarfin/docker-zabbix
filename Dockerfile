@@ -5,7 +5,7 @@ ENV TZ=America/Lima
 RUN apt-get update && apt-get -y upgrade; \
 # Packages installation
 DEBIAN_FRONTEND=noninteractive apt-get -y --fix-missing install apache2 \
-wget vim \
+wget vim locales locales-all \
 php \
 php-cli \
 php-gd \
@@ -27,6 +27,11 @@ lynx-cur; \
 a2enmod rewrite; \
 phpenmod mcrypt; \
 mkdir /backup;
+
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
 # Update the default apache site with the config we created.
 ADD config/apache/apache-virtual-hosts.conf /etc/apache2/sites-enabled/000-default.conf
 ADD config/apache/apache2.conf /etc/apache2/apache2.conf
@@ -47,7 +52,11 @@ chown -R www-data:www-data /var/www ; \
 cd / \
 wget https://repo.zabbix.com/zabbix/4.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_4.2-1+xenial_all.deb; \
 dpkg -i zabbix-release_4.2-1+xenial_all.deb; \
-apt update;
+apt-get update; \
+apt-get install -y zabbix-server-mysql zabbix-frontend-php;
+
+ADD config/zabbix/apache.conf /etc/zabbix/apache.conf
+ADD config/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf
 
 WORKDIR /var/www/
 
