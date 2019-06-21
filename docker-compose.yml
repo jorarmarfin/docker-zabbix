@@ -1,38 +1,24 @@
 version: '3.5'
 services:
   server:
-    container_name: 'srv-zabbix-server'
-    image: zabbix/zabbix-server-mysql:latest
-    restart: always
-    environment:
-      - DB_SERVER_HOST=${DB_HOST}
-      - MYSQL_USER=${DB_USER_NAME}
-      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
+    container_name: srv-zabbix
+    image: jorarmarfin/zabbix:4.2
     volumes:
-      - ./data_zabbix_server_alertscripts:/usr/lib/zabbix/alertscripts
-      - ./data_zabbix_server_externalscripts:/usr/lib/zabbix/externalscripts
-      - ./data_zabbix_server_modules:/usr/lib/zabbix/modules
-      - ./data_zabbix_server_enc:/usr/lib/zabbix/enc
-      - ./data_zabbix_server_ssl_cert:/usr/lib/zabbix/ssl/certs
-      - ./data_zabbix_server_ssl_keys:/usr/lib/zabbix/ssl/keys
-      - ./data_zabbix_server_ssl_ca:/usr/lib/zabbix/ssl/ssl_ca
-      - ./data_zabbix_server_snmptraps:/usr/lib/zabbix/snmptraps
-      - ./data_zabbix_server_mibs:/usr/lib/zabbix/mibs
+      - ./zabbix/backup:/backup
     ports:
-      - ${PORT_SERVER}:10051
-  frontend:
-    container_name: 'srv-zabbix-web'
-    image: zabbix/zabbix-web-apache-mysql:latest
-    restart: always
+      - 9004:80
+    networks: 
+      - net-zabbix
+  db:
+    container_name: srv-zabbix-mysql
+    image: mysql:5.7
     environment:
-      - DB_SERVER_HOST=${DB_HOST}
-      - ZBX_SERVER_HOST=${SERVER_HOST}
-      - MYSQL_USER=${DB_USER_NAME}
-      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-      - PHP_TZ="America/Recife"
+      - MYSQL_ROOT_PASSWORD=${PASS_MYSQL}
     volumes:
-      - ./data_zabbix_web:/etc/ssl/apache2
-    ports:
-      - ${PORT_WEB}:80
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/backup:/backup
+    networks:
+      - net-zabix
+networks: 
+  net-zabbix:
