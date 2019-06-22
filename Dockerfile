@@ -53,7 +53,8 @@ chown -R www-data:www-data /var/www ;
 RUN wget https://repo.zabbix.com/zabbix/4.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_4.2-1+xenial_all.deb -P /; \
 dpkg -i /zabbix-release_4.2-1+xenial_all.deb; \
 apt-get update; \
-apt-get install -y  zabbix-frontend-php;
+apt-get install -y  zabbix-frontend-php; \
+apt-get install -y  zabbix-server-mysql; 
 
 ADD config/zabbix/apache.conf /etc/zabbix/apache.conf
 ADD config/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf

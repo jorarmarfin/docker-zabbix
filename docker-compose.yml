@@ -2,7 +2,7 @@ version: '3.5'
 services:
   web:
     container_name: srv-zabbix
-    image: jorarmarfin/zabbix:4.2
+    image: jorarmarfin/zabbix:4.2-deploy
     volumes:
       - ./zabbix/backup:/backup
     ports:
@@ -11,7 +11,7 @@ services:
       - net-zabbix
   db:
     container_name: srv-zabbix-mysql
-    image: jorarmarfin/mysql:5.7-zabbix
+    image: jorarmarfin/mysql:5.7-zabbix42
     environment:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
