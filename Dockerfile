@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 
 ENV TZ=America/Lima
+ENV TERM=xterm
+
 
 RUN apt-get update && apt-get -y upgrade; \
 # Packages installation
@@ -22,7 +24,6 @@ libapache2-mod-php \
 curl \
 php-curl \
 apt-transport-https \
-nano \
 lynx-cur; \
 a2enmod rewrite; \
 phpenmod mcrypt; \
@@ -47,13 +48,12 @@ RUN chmod 755 /*.sh \
 # Add phpinfo script for INFO purposes
 echo "<?php phpinfo();" >> /var/www/index.php; \
 service apache2 restart; \
-chown -R www-data:www-data /var/www ; \
+chown -R www-data:www-data /var/www ; 
 #Instalacion de Zabbix
-cd / \
-wget https://repo.zabbix.com/zabbix/4.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_4.2-1+xenial_all.deb; \
-dpkg -i zabbix-release_4.2-1+xenial_all.deb; \
+RUN wget https://repo.zabbix.com/zabbix/4.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_4.2-1+xenial_all.deb -P /; \
+dpkg -i /zabbix-release_4.2-1+xenial_all.deb; \
 apt-get update; \
-apt-get install -y zabbix-server-mysql zabbix-frontend-php;
+apt-get install -y  zabbix-frontend-php;
 
 ADD config/zabbix/apache.conf /etc/zabbix/apache.conf
 ADD config/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf

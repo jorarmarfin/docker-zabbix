@@ -11,7 +11,7 @@ services:
       - net-zabbix
   db:
     container_name: srv-zabbix-mysql
-    image: mysql:5.7
+    image: jorarmarfin/mysql:5.7-zabbix
     environment:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
