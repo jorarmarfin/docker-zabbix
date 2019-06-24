@@ -2,7 +2,7 @@ version: '3.5'
 services:
   web:
     container_name: srv-zabbix
-    image: jorarmarfin/zabbix:4.2-deploy
+    image: jorarmarfin/zabbix:4.2
     volumes:
       - ./zabbix/backup:/backup
     ports:
