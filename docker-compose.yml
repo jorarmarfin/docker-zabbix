@@ -7,6 +7,7 @@ services:
       - ./zabbix/backup:/backup
     ports:
       - 9004:80
+      - 10050:10050
     networks: 
       - net-zabbix
   db:

@@ -65,5 +65,6 @@ VOLUME /var/www
 VOLUME /backup
 
 EXPOSE 80
+EXPOSE 10050
 
 CMD ["/init.sh"]
