@@ -5,3 +5,4 @@
 
 ## Archivos de configuracion
 * /usr/share/zabbix/conf/zabbix.conf.php
+* /usr/share/zabbix/include/locales.inc.php

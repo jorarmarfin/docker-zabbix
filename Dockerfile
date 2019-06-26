@@ -58,6 +58,8 @@ apt-get install -y  zabbix-server-mysql;
 
 ADD config/zabbix/apache.conf /etc/zabbix/apache.conf
 ADD config/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf
+ADD config/zabbix/zabbix.conf.php /usr/share/zabbix/conf/zabbix.conf.php
+ADD config/zabbix/locales.inc.php /usr/share/zabbix/include/locales.inc.php
 
 WORKDIR /var/www/
 
