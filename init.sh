@@ -2,4 +2,5 @@
 
 source /etc/apache2/envvars
 exec apache2 -D FOREGROUND
-exec service zabbix-server start
+service zabbix-server start;
+update-rc.d zabbix-server enable;
