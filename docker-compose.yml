@@ -6,8 +6,8 @@ services:
     volumes:
       - ./zabbix/backup:/backup
     ports:
-      - 9001:80
-      - 10050:10050
+      - 9007:80
+      - 10051:10051
     networks: 
       - net-zabbix
   db:

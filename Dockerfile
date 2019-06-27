@@ -40,7 +40,7 @@ ADD config/apache/ports.conf /etc/apache2/ports.conf
 ADD config/apache/envvars /etc/apache2/envvars
 
 # Update php.ini
-ADD config/php/php.conf /etc/php/7.0/apache2/php.ini
+ADD config/php/php.ini /etc/php/7.0/apache2/php.ini
 
 # Init
 ADD init.sh /init.sh
@@ -67,6 +67,6 @@ VOLUME /var/www
 VOLUME /backup
 
 EXPOSE 80
-EXPOSE 10050
+EXPOSE 10051
 
 CMD ["/init.sh"]
