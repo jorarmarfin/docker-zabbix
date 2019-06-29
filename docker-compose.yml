@@ -21,5 +21,10 @@ services:
       - ./mysql/backup:/backup
     networks:
       - net-zabbix
+  ubuntu:
+    container_name: srv-ubuntu
+    image: jorarmarfin/ubuntu:latest
+    networks: 
+      - net-zabbix
 networks: 
   net-zabbix:
