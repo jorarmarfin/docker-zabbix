@@ -34,5 +34,4 @@ services:
       - net-zabbix
 networks: 
   net-zabbix:
-
 ```
